@@ -1,0 +1,4 @@
+dist
+build
+load_data_pkg.egg-info
+.idea
