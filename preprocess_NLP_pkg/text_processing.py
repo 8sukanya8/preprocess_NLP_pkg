@@ -1,3 +1,6 @@
+"""This file contains functions for tokenizing, normalising, removing special characters etc.
+"""
+
 import re, unicodedata
 import inflect
 from nltk.corpus import stopwords
