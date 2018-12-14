@@ -1,8 +1,20 @@
-import re, string, unicodedata
+import re, unicodedata
 import inflect
 from nltk.corpus import stopwords
 from nltk.stem import LancasterStemmer, WordNetLemmatizer
 
+
+def tokenize(character_seq, delimiter, remove_chars = None):
+    """Removes given characters from a character sequence and splits according to the given delimiter
+        character_seq -- character sequence to be split
+        delimiter -- to split the character sequence
+        remove_chars = the characters to remove
+    """
+    if remove_chars.len is not None:
+        for i in remove_chars:
+            re.sub(i, "", character_seq)
+    tokens = character_seq.split(delimiter)
+    return tokens
 
 def remove_non_ascii(words):
     """Remove non-ASCII characters from list of tokenized words"""
