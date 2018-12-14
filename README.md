@@ -1,4 +1,4 @@
-# NLP Preprocessing Library
+# NLP Preprocessing Package
 
 This is a text processing lirary. The library is divided into following modules.
 
@@ -17,3 +17,29 @@ This is a text processing lirary. The library is divided into following modules.
 
 <p> <b> Corpus Processor </b>
 <p> This is a module which helps to convert the corpus into dictionaries (Key- Author, Values - Books by author)
+
+
+## Building and Installation
+
+#### Build package
+Building requires <b> wheel </b>. If not installed, please install using the following command.
+
+```python3 -m pip install --user --upgrade setuptools wheel```
+
+Install requirements
+
+```pip install -r requirements.txt```
+
+Then enter the package directory and build the package using the following command.
+
+```python3 setup.py sdist bdist_wheel```
+
+This creates the dist folder containing the packaged tar files.
+
+#### Install package
+
+```pip install ./dist/preprocess_NLP_pkg-0.0.1.tar.gz```
+
+#### To Uninstall package
+
+```pip uninstall preprocess_NLP_pkg-0.0.1```

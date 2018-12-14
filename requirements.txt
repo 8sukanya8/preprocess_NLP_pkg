@@ -1,0 +1,7 @@
+nltk
+lxml
+matplotlib
+numpy
+requests
+scikit-learn
+scipy

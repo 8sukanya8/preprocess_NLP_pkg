@@ -1,3 +1,5 @@
 name = "preprocess_NLP_pkg"
-from .load_data import read_file, read_compressed_lzma_file
-# python3 setup.py sdist bdist_wheel
+from .load_data import *
+from .distance_measures import *
+from .feature_selection import *
+from .text_processing import *
