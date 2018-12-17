@@ -15,9 +15,16 @@ def read_file(filepath, mode = 'r'): # rb for raw binary
         f.close()
     return file_content
 
-
-
-
 def read_compressed_lzma_file(character_seq):
     lzma.open(character_seq, mode="rb")
     lzma.LZMAFile(filename=character_seq, mode="r")
+
+def write_file(filepath, text, mode = 'w'):
+    """Write a text into a file
+        filepath -- path to a file to be written
+        text -- text to be written
+        mode -- mode of writing, default is overwrite
+    """
+    f = open(filepath, mode)
+    f.write(text)
+    f.close()
