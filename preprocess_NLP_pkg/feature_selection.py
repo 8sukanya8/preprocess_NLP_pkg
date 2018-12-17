@@ -52,4 +52,8 @@ def char_ngram_freq(text, n):
 
 def select_features(feature_list, candidate_dict):
     #extract_features = [key for key, value in candidate_dict.items() if key in feature_list]
-    feature_dict = {key: candidate_dict[key] for key in feature_list}
+    feature_dict = {key: candidate_dict.get(key) for key in feature_list}
+    for key in feature_dict.keys():
+        if feature_dict.get(key) is None:
+            feature_dict.get(key) == 0
+    return feature_dict
