@@ -28,12 +28,11 @@ def word_freq_count(text, number_of_terms = 0):
         return dict(word_freq.most_common(number_of_terms))
 
 
-def select_word_vector(text, selected_words, number_of_terms=50):
+def select_word_vector(word_freq_dict, text, selected_words):
     """Given a list of selected most common keywords, Returns a dictionary of frequent words. Note that if a selected keyword is not present, 0 is returened as the key value.
         word_freq_dict -- a dictionary of word frequency
         selected_words -- a list of words to check against
     """
-    word_freq_dict = word_freq_count(text, number_of_terms)
     word_freq_dict_selected = {}
     for key in selected_words:
         value = 0
