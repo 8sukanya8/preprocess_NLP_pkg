@@ -46,3 +46,12 @@ def author_dictionary_italian(corpus_token_path):
             if existing_token_files is not None:
                 author_name_token_dict[correct_author[i]].append(token_files[i])
     return author_name_token_dict
+
+def most_common_words_list(filepath, col_num = 1, word_separator = "\t",line_separator = "\n"):
+    lines = read_file(filepath).split(line_separator)
+    selected_column = []
+    for line in lines:
+        words = line.split(word_separator)
+        if(words.__len__() > col_num):
+            selected_column.append(words[col_num])
+    return selected_column

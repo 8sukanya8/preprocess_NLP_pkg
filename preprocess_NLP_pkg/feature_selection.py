@@ -17,15 +17,30 @@ def convert_dict_to_numpy_array(dictionary):
         print("Error!! Wrong input. Input should be a dictionary!")
 
 def word_freq_count(text, number_of_terms = 0):
-    """Returns a list of word frequencies given a text
+    """Returns a dictionary of word frequency given a text
         text -- the text from which the word frequencies are to be extracted
-        nunumber_of_terms -- number of terms to extract
+        number_of_terms -- number of terms to extract
     """
     word_freq = FreqDist(nltk.tokenize.word_tokenize(text))
     if number_of_terms <= 0:
         return  dict(word_freq)
     else:
         return dict(word_freq.most_common(number_of_terms))
+
+
+def select_word_vector(text, selected_words, number_of_terms=50):
+    """Given a list of selected most common keywords, Returns a dictionary of frequent words. Note that if a selected keyword is not present, 0 is returened as the key value.
+        word_freq_dict -- a dictionary of word frequency
+        selected_words -- a list of words to check against
+    """
+    word_freq_dict = word_freq_count(text, number_of_terms)
+    word_freq_dict_selected = {}
+    for key in selected_words:
+        value = 0
+        if word_freq_dict.get(key) is not None:
+            value = word_freq_dict.get(key)
+        word_freq_dict_selected[key] = value
+    return word_freq_dict_selected
 
 
 def word_freq_count_normalised(text, number_of_terms = 0):
