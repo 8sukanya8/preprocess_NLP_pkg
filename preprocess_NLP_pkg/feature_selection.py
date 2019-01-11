@@ -5,6 +5,7 @@ import nltk
 from nltk.probability import FreqDist
 import numpy as np
 import collections
+import re
 # from nltk.book import *
 
 def convert_dict_to_numpy_array(dictionary):
@@ -71,3 +72,16 @@ def select_features(feature_list, candidate_dict):
         if feature_dict.get(key) is None:
             feature_dict.get(key) == 0
     return feature_dict
+
+def most_common_ngrams(text, n, number_of_terms=0):
+    """Returns the most common ngrams as a dictionary
+        text -- the text from which the ngrams are to be extracted
+        number_of_terms -- number of terms to extract
+    """
+    all_ngrams = char_ngram_freq(text, n)
+    if number_of_terms == 0:
+        return all_ngrams.most_common()
+    elif number_of_terms >0 :
+        return all_ngrams.most_common(number_of_terms)
+    else:
+        print("Error! Cannot have negative number of ngrams returned")
