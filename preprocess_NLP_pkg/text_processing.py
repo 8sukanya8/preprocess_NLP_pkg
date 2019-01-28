@@ -28,30 +28,27 @@ def remove_non_ascii(words):
     return new_words
 
 
-def to_lowercase(words):
+def to_lowercase(word_list):
     """Convert all characters to lowercase from list of tokenized words"""
-    new_words = []
-    for word in words:
-        new_word = word.lower()
-        new_words.append(new_word)
-    return new_words
+    lowercase_words = [word.lower() for word in word_list]
+    return lowercase_words
 
 
-def remove_punctuation(words):
+def remove_punctuation(word_list):
     """Remove punctuation from list of tokenized words"""
     new_words = []
-    for word in words:
+    for word in word_list:
         new_word = re.sub(r'[^\w\s]', '', word)
         if new_word != '':
             new_words.append(new_word)
     return new_words
 
 
-def replace_numbers(words):
+def replace_numbers(word_list):
     """Replace all interger occurrences in list of tokenized words with textual representation"""
     p = inflect.engine()
     new_words = []
-    for word in words:
+    for word in word_list:
         if word.isdigit():
             new_word = p.number_to_words(word)
             new_words.append(new_word)

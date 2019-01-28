@@ -8,6 +8,7 @@ import collections
 import re
 # from nltk.book import *
 
+
 def convert_dict_to_numpy_array(dictionary):
     """Converts a dict into a numpy array.
         dictionary - the dict to be converted
@@ -16,6 +17,55 @@ def convert_dict_to_numpy_array(dictionary):
         return np.array(list(dictionary.items()))
     else:
         print("Error!! Wrong input. Input should be a dictionary!")
+
+
+def select_features(feature_list, candidate_dict):
+    #extract_features = [key for key, value in candidate_dict.items() if key in feature_list]
+    feature_dict = {key: candidate_dict.get(key) for key in feature_list}
+    for key in feature_dict.keys():
+        if feature_dict.get(key) is None:
+            feature_dict.get(key) == 0
+    return feature_dict
+
+
+""" Lexical features: Such features consider a text as a mere sequence of word-tokens
+"""
+def max_word_length(text):
+    words = nltk.tokenize.word_tokenize(text)
+    return len(max(words))
+
+
+def average_word_length(text):
+    words = nltk.tokenize.word_tokenize(text)
+    return sum([len(word) for word in words]) / len(words)
+
+
+def max_sentence_length(text):
+    sentences = nltk.tokenize.sent_tokenize(text) # note that english is by default, for other languages set in the config
+    return len(max(sentences))
+
+
+def average_sentence_length(text):
+    sentences = nltk.tokenize.sent_tokenize(text)
+    return sum([len(sentence) for sentence in sentences]) / len(sentences)
+
+
+def yules_K(text):
+    words = nltk.tokenize.word_tokenize(text)
+    s1 = len(words)
+    word_freq_dist = FreqDist(nltk.tokenize.word_tokenize(text))
+    s2 = sum([freq ** 2 for freq in word_freq_dist.values()])
+    K = 10000 * (s2-s1)/(s1**2)
+    return K
+
+
+def TTR(text):
+    words = nltk.tokenize.word_tokenize(text)
+    word_freq_dist = FreqDist(nltk.tokenize.word_tokenize(text))
+    tokens = word_freq_dist.keys()
+    lexical_density = len(tokens)/len(words)*100
+    return lexical_density
+
 
 def word_freq_count(text, number_of_terms = 0):
     """Returns a dictionary of word frequency given a text
@@ -58,6 +108,14 @@ def word_freq_count_normalised(text, number_of_terms = 0):
     else:
         return dict(word_freq.most_common(number_of_terms))
 
+
+""" Character features: Such features consider a text as a mere sequence of characters
+"""
+
+#def select_ngram_vector(word_freq_dict, text, selected_words):
+    ## implementation required.
+
+
 ## need to test the functions
 def char_ngram_freq(text, n):
     #word_grams = nltk.ngrams(text.split(), n)
@@ -65,13 +123,6 @@ def char_ngram_freq(text, n):
     char_ngrams_freq = collections.Counter(char_ngrams)
     return char_ngrams_freq
 
-def select_features(feature_list, candidate_dict):
-    #extract_features = [key for key, value in candidate_dict.items() if key in feature_list]
-    feature_dict = {key: candidate_dict.get(key) for key in feature_list}
-    for key in feature_dict.keys():
-        if feature_dict.get(key) is None:
-            feature_dict.get(key) == 0
-    return feature_dict
 
 def most_common_ngrams(text, n, number_of_terms=0):
     """Returns the most common ngrams as a dictionary
@@ -85,3 +136,20 @@ def most_common_ngrams(text, n, number_of_terms=0):
         return all_ngrams.most_common(number_of_terms)
     else:
         print("Error! Cannot have negative number of ngrams returned")
+
+
+def alphabet_chars_count(text):
+    return re.findall("[a-z]", text.lower()).__len__()
+
+
+def uppercase_chars_count(text):
+    return re.findall("[A-Z]", text).__len__()
+
+
+def lowercase_chars_count(text):
+    return re.findall("[A-Z]", text).__len__()
+
+
+def digits_count(text):
+    return re.findall("[0-9]", text).__len__()
+
