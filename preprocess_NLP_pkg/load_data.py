@@ -3,7 +3,7 @@
 import lzma
 
 
-def read_file(filepath, mode = 'r', ignore_comments = True): # rb for raw binary
+def read_file(filepath, mode = 'r', ignore_comments = True): # rb for raw binary, note that rb can only be used if ignore_comments==False . Also, remember to decode using '.decode('utf-8')
     """Read the contents of a file
         filepath -- path to a file to be read
     """

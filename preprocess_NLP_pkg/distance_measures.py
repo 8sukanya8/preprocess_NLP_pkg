@@ -59,6 +59,9 @@ def cosine_similarity(x, y):
         """
     numerator = sum(a * b for a, b in zip(x, y))
     denominator = square_root_sum(x) * square_root_sum(y)
+    if denominator == 0:
+        print("Error! Division by zero attempted")
+        return
     return numerator / float(denominator)
 
 

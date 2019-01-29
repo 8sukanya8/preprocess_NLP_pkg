@@ -3,7 +3,10 @@ To be used only for private processing
 """
 
 import os
-from .load_data import read_file
+import re
+from preprocess_NLP_pkg.load_data import read_file
+from nltk.probability import FreqDist
+from nltk import tokenize
 
 def author_dictionary (corpus_token_path, correct_author_path):
     """Take a path to a folder of token files and a file of correct authors
@@ -55,3 +58,16 @@ def most_common_words_list(filepath, col_num = 1, word_separator = "\t",line_sep
         if(words.__len__() > col_num):
             selected_column.append(words[col_num])
     return selected_column
+
+
+def most_common_words_from_corpus(text, occurence = 2):
+    """Given a text, extract the types and their frequency, returns those types which have at least given number of occurences.
+        Say a word occurs twice, and occurence = 3, then the word is not selected.
+        Keyword arguments:
+            text -- given text
+            occurence - those words are allowed which have a minimum occurence as specified
+    """
+    words = tokenize.word_tokenize(text.lower())
+    word_frequency = FreqDist(words)
+    selected_words = [key for key in word_frequency.keys() if word_frequency.get(key) >= occurence]
+    return selected_words
