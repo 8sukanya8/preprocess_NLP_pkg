@@ -1,6 +1,6 @@
 # NLP Preprocessing Package
-
-This is a text processing lirary. The library is divided into following modules.
+Text Mining relies heavily on the pre-processing. This library is an assortment of common text processing techniques. 
+The library is divided into following modules.
 
 
 <p> <b> Load Data </b>
