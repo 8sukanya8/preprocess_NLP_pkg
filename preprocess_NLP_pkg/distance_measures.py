@@ -3,12 +3,22 @@
 
 from math import sqrt
 from decimal import Decimal
-
+import logging
 
 def euclidean_distance(x, y):
     """ Calculates the euclidean distance between the vectors x and y
         x,y -- the vectors between which the distance is to be calculated
     """
+    try:
+        iter(x)
+    except TypeError:
+        logging.warning( 'Argument x is not iterable. None is returned')
+        return None
+    try:
+        iter(y)
+    except TypeError:
+        logging.warning( 'Argument y is not iterable. None is returned')
+        return None
     return sqrt(sum(pow(a - b, 2) for a, b in zip(x, y)))
 
 
@@ -23,6 +33,16 @@ def manhattan_distance(x, y):
     """ Calculates the manhattan distance between the vectors x and y
         x,y -- the vectors between which the distance is to be calculated
     """
+    try:
+        iter(x)
+    except TypeError:
+        logging.warning( 'Argument x is not iterable. None is returned')
+        return None
+    try:
+        iter(y)
+    except TypeError:
+        logging.warning( 'Argument y is not iterable. None is returned')
+        return None
     return sum(abs(a - b) for a, b in zip(x, y))
 
 def inverse_manhattan_similarity(x, y):
@@ -34,10 +54,14 @@ def inverse_manhattan_similarity(x, y):
 def nth_root(value, n_root):
     """ Calculates the nth root of a value
         value -- value for which the nth root is to be calculated
+        n_root -- the nth root to be calculated, n > 0
     """
-    root_value = 1 / float(n_root)
-    return round(Decimal(value) ** Decimal(root_value), 3)
-
+    try:
+        root_value = 1 / float(n_root)
+        return round(Decimal(value) ** Decimal(root_value), 3)
+    except ZeroDivisionError:
+        logging.error("Error! n_root should be greater than 0")
+        return None
 
 def minkowski_distance(x, y, p_value):
     """ Calculates the minskowski's distance between the vectors x and y
