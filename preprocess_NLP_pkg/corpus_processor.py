@@ -50,7 +50,7 @@ def author_dictionary_italian(corpus_token_path):
                 author_name_token_dict[correct_author[i]].append(token_files[i])
     return author_name_token_dict
 
-def most_common_words_list(filepath, col_num = 1, word_separator = "\t",line_separator = "\n"):
+def most_common_words_from_file(filepath, col_num = 1, word_separator = "\t",line_separator = "\n"):
     lines = read_file(filepath).split(line_separator)
     selected_column = []
     for line in lines:
