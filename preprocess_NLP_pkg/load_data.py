@@ -5,12 +5,12 @@ import os
 import fnmatch
 
 
-def read_file(filepath, mode = 'r', ignore_comments = True): # rb for raw binary, note that rb can only be used if ignore_comments==False . Also, remember to decode using '.decode('utf-8')
+def read_file(file_path, mode = 'r', ignore_comments = True): # rb for raw binary, note that rb can only be used if ignore_comments==False . Also, remember to decode using '.decode('utf-8')
     """Read the contents of a file
         Keyword arguments:
-            filepath -- path to a file to be read
+            file_path -- path to a file to be read
     """
-    f = open(filepath, mode)# encoding = encoding)
+    f = open(file_path, mode)# encoding = encoding)
     file_content = ""
     try:
         if ignore_comments is False:
@@ -24,25 +24,26 @@ def read_file(filepath, mode = 'r', ignore_comments = True): # rb for raw binary
     return file_content
 
 
-def read_compressed_lzma_file(character_seq):
+def read_compressed_lzma_file(file_path):
     """Read the contents of a compressed lzma_file
         Keyword arguments:
-            filepath -- path to a file to be read
+            file_path -- path to a file to be read
     """
-    lzma.open(character_seq, mode="rb")
-    lzma.LZMAFile(filename=character_seq, mode="r")
+    #lzma.open(file_path, mode="rb")
+    return lzma.LZMAFile(filename=file_path, mode="r")
 
 
-def write_file(filepath, text, mode = 'w'):
+def write_file(file_path, text, mode = 'w'):
     """Write a text into a file
         Keyword arguments:
-            filepath -- path to a file to be written
+            file_path -- path to a file to be written
             text -- text to be written
             mode -- mode of writing, default is overwrite
     """
-    f = open(filepath, mode)
+    f = open(file_path, mode)
     f.write(text)
     f.close()
+
 
 def load_files_from_dir(dir, pattern = "*"):
     """Given a directory, load files. If pattern is mentioned, load files with given pattern

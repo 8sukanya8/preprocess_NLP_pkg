@@ -3,15 +3,16 @@
 
 import re, unicodedata
 import inflect
-from nltk.corpus import stopwords
+from nltk.corpus import stopword_list
 from nltk.stem import LancasterStemmer, WordNetLemmatizer
 
 
 def tokenize(character_seq, delimiter, remove_chars = None):
     """Removes given characters from a character sequence and splits according to the given delimiter
-        character_seq -- character sequence to be split
-        delimiter -- to split the character sequence
-        remove_chars = the characters to remove
+        Keyword arguments:
+            character_seq -- character sequence to be split
+            delimiter -- to split the character sequence
+            remove_chars = the characters to remove
     """
     if remove_chars.len is not None:
         for i in remove_chars:
@@ -19,84 +20,88 @@ def tokenize(character_seq, delimiter, remove_chars = None):
     tokens = character_seq.split(delimiter)
     return tokens
 
-def remove_non_ascii(words):
-    """Remove non-ASCII characters from list of tokenized words"""
-    new_words = []
-    for word in words:
+
+def remove_non_ascii(word_list):
+    """Remove non-ASCII characters from list of tokenized word_list
+        Keyword arguments:
+            word_list:
+    """
+    new_word_list = []
+    for word in word_list:
         new_word = unicodedata.normalize('NFKD', word).encode('ascii', 'ignore').decode('utf-8', 'ignore')
-        new_words.append(new_word)
-    return new_words
+        new_word_list.append(new_word)
+    return new_word_list
 
 
 def to_lowercase(word_list):
-    """Convert all characters to lowercase from list of tokenized words"""
-    lowercase_words = [word.lower() for word in word_list]
-    return lowercase_words
+    """Convert all characters to lowercase from list of tokenized word_list"""
+    lowercase_word_list = [word.lower() for word in word_list]
+    return lowercase_word_list
 
 
 def remove_punctuation(word_list):
-    """Remove punctuation from list of tokenized words"""
-    new_words = []
+    """Remove punctuation from list of tokenized word_list"""
+    new_word_list = []
     for word in word_list:
         new_word = re.sub(r'[^\w\s]', '', word)
         if new_word != '':
-            new_words.append(new_word)
-    return new_words
+            new_word_list.append(new_word)
+    return new_word_list
 
 
 def replace_numbers(word_list):
-    """Replace all interger occurrences in list of tokenized words with textual representation"""
+    """Replace all interger occurrences in list of tokenized word_list with textual representation"""
     p = inflect.engine()
-    new_words = []
+    new_word_list = []
     for word in word_list:
         if word.isdigit():
-            new_word = p.number_to_words(word)
-            new_words.append(new_word)
+            new_word = p.number_to_word_list(word)
+            new_word_list.append(new_word)
         else:
-            new_words.append(word)
-    return new_words
+            new_word_list.append(word)
+    return new_word_list
 
 
 
-def remove_stopwords(words):
-    """Remove stop words from list of tokenized words"""
-    new_words = []
-    for word in words:
-        if word not in stopwords.words('english'):
-            new_words.append(word)
-    return new_words
+def remove_stopword_list(word_list):
+    """Remove stop word_list from list of tokenized word_list"""
+    new_word_list = []
+    for word in word_list:
+        if word not in stopword_list.word_list('english'):
+            new_word_list.append(word)
+    return new_word_list
 
 
-def stem_words(words):
-    """Stem words in list of tokenized words"""
+def stem_word_list(word_list):
+    """Stem word_list in list of tokenized word_list"""
     stemmer = LancasterStemmer()
     stems = []
-    for word in words:
+    for word in word_list:
         stem = stemmer.stem(word)
         stems.append(stem)
     return stems
 
 
-def lemmatize_verbs(words):
-    """Lemmatize verbs in list of tokenized words"""
+def lemmatize_verbs(word_list):
+    """Lemmatize verbs in list of tokenized word_list"""
     lemmatizer = WordNetLemmatizer()
     lemmas = []
-    for word in words:
+    for word in word_list:
         lemma = lemmatizer.lemmatize(word, pos='v')
         lemmas.append(lemma)
     return lemmas
 
 
-def normalize(words):
-    words = remove_non_ascii(words)
-    words = to_lowercase(words)
-    words = remove_punctuation(words)
-    words = replace_numbers(words)
-    words = remove_stopwords(words)
-    return words
+def normalize(word_list):
+    word_list = remove_non_ascii(word_list)
+    word_list = to_lowercase(word_list)
+    word_list = remove_punctuation(word_list)
+    word_list = replace_numbers(word_list)
+    word_list = remove_stopword_list(word_list)
+    return word_list
 
 
-def stem_and_lemmatize(words):
-    stems = stem_words(words)
-    lemmas = lemmatize_verbs(words)
+def stem_and_lemmatize(word_list):
+    stems = stem_word_list(word_list)
+    lemmas = lemmatize_verbs(word_list)
     return stems, lemmas

@@ -14,13 +14,13 @@ class TestAuthorDictionaryItalian(unittest.TestCase):
         pass
 
 
-class TestMostCommonWordsFromFile(unittest.TestCase):
+class TestMostCommonword_listFromFile(unittest.TestCase):
 
-    def test_most_common_words_from_file(self):
+    def test_most_common_word_list_from_file(self):
         pass
 
 
-class TestMostCommonWordsFromCorpus(unittest.TestCase):
+class TestMostCommonword_listFromCorpus(unittest.TestCase):
 
-    def test_most_common_words_from_corpus(self):
+    def test_most_common_word_list_from_corpus(self):
         pass

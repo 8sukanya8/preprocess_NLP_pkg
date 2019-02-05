@@ -3,7 +3,6 @@ To be used only for private processing
 """
 
 import os
-import re
 from preprocess_NLP_pkg.load_data import read_file
 from nltk.probability import FreqDist
 from nltk import tokenize
@@ -11,7 +10,7 @@ from nltk import tokenize
 
 def author_dictionary (corpus_token_path, correct_author_path):
     """Take a path to a folder of token files and a file of correct authors
-        and for each author, create a dictionary of words for all respective tokens
+        and for each author, create a dictionary of word_list for all respective tokens
         (works for french and english corpora)
         Keyword arguments:
         corpus_token_path -- folder path of tokens
@@ -33,7 +32,7 @@ def author_dictionary (corpus_token_path, correct_author_path):
 
 def author_dictionary_italian(corpus_token_path):
     """Take a path to a folder of token files and a file of correct authors
-            and for each author, create a dictionary of words for all respective tokens
+            and for each author, create a dictionary of word_list for all respective tokens
             (works for Italian corpora)
             Keyword arguments:
             corpus_token_path -- folder path of tokens
@@ -58,19 +57,19 @@ def get_freq_dist_from_corpus(text):
         Keyword arguments:
             text -- given text
     """
-    words = tokenize.word_tokenize(text.lower())
-    return FreqDist(words)
+    word_list = tokenize.word_tokenize(text.lower())
+    return FreqDist(word_list)
 
 
-def get_words_with_freq_at_least_n(text, n = 2):
-    """Given a list of documents, extracts a list of words having frequency greater than or equal to the occurrence mentioned
+def get_word_list_with_freq_at_least_n(text, n = 2):
+    """Given a list of documents, extracts a list of word_list having frequency greater than or equal to the occurrence mentioned
         Keyword arguments:
             doc_names_list -- list of document names
-            n - those words are selected which have frequency greater than or equal to n
+            n - those word_list are selected which have frequency greater than or equal to n
     """
     word_freq_dists = get_freq_dist_from_corpus(text)
-    selected_words = [word for word,freq in word_freq_dists if freq >= n]
-    return selected_words
+    selected_word_list = [word for word,freq in word_freq_dists if freq >= n]
+    return selected_word_list
 
 
 def get_complete_text(doc_list):

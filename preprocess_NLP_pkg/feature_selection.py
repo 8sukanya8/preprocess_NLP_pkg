@@ -31,13 +31,13 @@ def select_features(feature_list, candidate_dict):
 """ Lexical features: Such features consider a text as a mere sequence of word-tokens
 """
 def max_word_length(text):
-    words = nltk.tokenize.word_tokenize(text)
-    return len(max(words))
+    word_list = nltk.tokenize.word_tokenize(text)
+    return len(max(word_list))
 
 
 def average_word_length(text):
-    words = nltk.tokenize.word_tokenize(text)
-    return sum([len(word) for word in words]) / len(words)
+    word_list = nltk.tokenize.word_tokenize(text)
+    return sum([len(word) for word in word_list]) / len(word_list)
 
 
 def max_sentence_length(text):
@@ -51,8 +51,8 @@ def average_sentence_length(text):
 
 
 def yules_K(text):
-    words = nltk.tokenize.word_tokenize(text)
-    s1 = len(words)
+    word_list = nltk.tokenize.word_tokenize(text)
+    s1 = len(word_list)
     word_freq_dist = FreqDist(nltk.tokenize.word_tokenize(text))
     s2 = sum([freq ** 2 for freq in word_freq_dist.values()])
     K = 10000 * (s2-s1)/(s1**2)
@@ -60,10 +60,10 @@ def yules_K(text):
 
 
 def TTR(text):
-    words = nltk.tokenize.word_tokenize(text)
+    word_list = nltk.tokenize.word_tokenize(text)
     word_freq_dist = FreqDist(nltk.tokenize.word_tokenize(text))
     tokens = word_freq_dist.keys()
-    lexical_density = len(tokens)/len(words)*100
+    lexical_density = len(tokens)/len(word_list)*100
     return lexical_density
 
 
@@ -79,13 +79,13 @@ def word_freq_count(text, number_of_terms = 0):
         return dict(word_freq.most_common(number_of_terms))
 
 
-def select_word_vector(word_freq_dict, text, selected_words):
-    """Given a list of selected most common keywords, Returns a dictionary of frequent words. Note that if a selected keyword is not present, 0 is returened as the key value.
+def select_word_vector(word_freq_dict, text, selected_word_list):
+    """Given a list of selected most common keyword_list, Returns a dictionary of frequent word_list. Note that if a selected keyword is not present, 0 is returened as the key value.
         word_freq_dict -- a dictionary of word frequency
-        selected_words -- a list of words to check against
+        selected_word_list -- a list of word_list to check against
     """
     word_freq_dict_selected = {}
-    for key in selected_words:
+    for key in selected_word_list:
         value = 0
         if word_freq_dict.get(key) is not None:
             value = word_freq_dict.get(key)
@@ -112,7 +112,7 @@ def word_freq_count_normalised(text, number_of_terms = 0):
 """ Character features: Such features consider a text as a mere sequence of characters
 """
 
-#def select_ngram_vector(word_freq_dict, text, selected_words):
+#def select_ngram_vector(word_freq_dict, text, selected_word_list):
     ## implementation required.
 
 

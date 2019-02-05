@@ -36,15 +36,15 @@ class TestReplaceNumbers(unittest.TestCase):
         pass
 
 
-class TestRemoveStopwords(unittest.TestCase):
+class TestRemoveStopword_list(unittest.TestCase):
 
-    def test_remove_stopwords(self):
+    def test_remove_stopword_list(self):
         pass
 
 
-class TestStemWords(unittest.TestCase):
+class TestStemword_list(unittest.TestCase):
 
-    def test_stem_words(self):
+    def test_stem_word_list(self):
         pass
 
 

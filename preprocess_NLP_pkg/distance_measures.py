@@ -6,8 +6,9 @@ from decimal import Decimal
 import logging
 
 def euclidean_distance(x, y):
-    """ Calculates the euclidean distance between the vectors x and y
-        x,y -- the vectors between which the distance is to be calculated
+    """Calculates the euclidean distance between the vectors x and y
+        Keyword arguments:
+            x,y -- the vectors between which the distance is to be calculated
     """
     try:
         iter(x)
@@ -23,15 +24,17 @@ def euclidean_distance(x, y):
 
 
 def inverse_euclidean_similarity(x, y):
-    """ Calculates the inverse euclidean similarity between the vectors x and y
-        x,y -- the vectors between which the similarity is to be calculated
+    """Calculates the inverse euclidean similarity between the vectors x and y
+        Keyword arguments:
+            x,y -- the vectors between which the similarity is to be calculated
     """
     return float(1/(1+ euclidean_distance(x,y)))
 
 
 def manhattan_distance(x, y):
-    """ Calculates the manhattan distance between the vectors x and y
-        x,y -- the vectors between which the distance is to be calculated
+    """Calculates the manhattan distance between the vectors x and y
+        Keyword arguments:
+            x,y -- the vectors between which the distance is to be calculated
     """
     try:
         iter(x)
@@ -46,15 +49,17 @@ def manhattan_distance(x, y):
     return sum(abs(a - b) for a, b in zip(x, y))
 
 def inverse_manhattan_similarity(x, y):
-    """ Calculates the inverse euclidean similarity between the vectors x and y
-        x,y -- the vectors between which the similarity is to be calculated
+    """Calculates the inverse euclidean similarity between the vectors x and y
+        Keyword arguments:
+            x,y -- the vectors between which the similarity is to be calculated
     """
     return float(1/(1+ manhattan_distance(x,y)))
 
 def nth_root(value, n_root):
-    """ Calculates the nth root of a value
-        value -- value for which the nth root is to be calculated
-        n_root -- the nth root to be calculated, n > 0
+    """Calculates the nth root of a value
+        Keyword arguments:
+            value -- value for which the nth root is to be calculated
+            n_root -- the nth root to be calculated, n > 0
     """
     try:
         root_value = 1 / float(n_root)
@@ -64,23 +69,26 @@ def nth_root(value, n_root):
         return None
 
 def minkowski_distance(x, y, p_value):
-    """ Calculates the minskowski's distance between the vectors x and y
-        x,y -- the vectors between which the distance is to be calculated
+    """Calculates the minskowski's distance between the vectors x and y
+        Keyword arguments:
+            x,y -- the vectors between which the distance is to be calculated
     """
     return nth_root(sum(pow(abs(a - b), p_value) for a, b in zip(x, y)), p_value)
 
 
 def square_root_sum(x):
-    """ Calculates the square root of the squared sum of a vector
+    """Calculates the square root of the squared sum of a vector
+        Keyword arguments:
             x -- input vector
     """
     return sqrt(sum([a * a for a in x]))
 
 
 def cosine_similarity(x, y):
-    """ Calculates the minskowski's distance between the vectors x and y
+    """Calculates the minskowski's distance between the vectors x and y
+        Keyword arguments:
             x,y -- the vectors between which the distance is to be calculated
-        """
+    """
     numerator = sum(a * b for a, b in zip(x, y))
     denominator = square_root_sum(x) * square_root_sum(y)
     if denominator == 0:
@@ -90,9 +98,10 @@ def cosine_similarity(x, y):
 
 
 def jaccard_similarity(x, y):
-    """ Calculates the minskowski's distance between the vectors x and y
+    """Calculates the minskowski's distance between the vectors x and y
+        Keyword arguments:
             x,y -- the vectors between which the distance is to be calculated
-        """
+    """
     intersection = len(set.intersection(*[set(x), set(y)]))
     union = len(set.union(*[set(x), set(y)]))
     return intersection / float(union)

@@ -46,4 +46,4 @@ This creates the dist folder containing the packaged tar files.
 ```pip uninstall preprocess_NLP_pkg-0.0.1```
 
 ## Resources
-1. List of most frequent words in different languages from the Computation Linguistics Group, **University of Neuchatel**  can be found [here](http://members.unine.ch/jacques.savoy/clef/)
+1. List of most frequent word_list in different languages from the Computation Linguistics Group, **University of Neuchatel**  can be found [here](http://members.unine.ch/jacques.savoy/clef/)
