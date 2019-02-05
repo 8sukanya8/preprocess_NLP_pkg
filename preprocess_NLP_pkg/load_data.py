@@ -1,6 +1,8 @@
 """This file contains functions for reading in text data in different formats
 """
 import lzma
+import os
+import fnmatch
 
 
 def read_file(filepath, mode = 'r', ignore_comments = True): # rb for raw binary, note that rb can only be used if ignore_comments==False . Also, remember to decode using '.decode('utf-8')
@@ -35,3 +37,15 @@ def write_file(filepath, text, mode = 'w'):
     f = open(filepath, mode)
     f.write(text)
     f.close()
+
+def load_files_from_dir(dir, pattern = "*"):
+    """Given a directory, load files. If pattern is mentioned, load files with given pattern
+                Keyword arguments:
+                    text -- given text
+                    delimiter - type of delimiter to be used, default value is '\n\n'
+            """
+    try:
+        return(fnmatch.filter(os.listdir(dir), pattern))
+    except TypeError:
+        print("Error! pattern should be a string or bytes like object. Returning None")
+        return None
