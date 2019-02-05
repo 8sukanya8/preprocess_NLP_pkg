@@ -89,7 +89,7 @@ def get_complete_text(doc_list):
 
 def append_folder_path_to_doc_list(doc_list, folder_path):
     """Given a list of documents, returns the concatenated text contained in all of them
-            Keyword arguments:
+        Keyword arguments:
             text -- given text
             window_size - number of characters in a window
             step_size - number of characters to skip before beginning next windows
