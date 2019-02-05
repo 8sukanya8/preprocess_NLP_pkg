@@ -5,6 +5,7 @@ from math import sqrt
 from decimal import Decimal
 import logging
 
+
 def euclidean_distance(x, y):
     """Calculates the euclidean distance between the vectors x and y
         Keyword arguments:
@@ -48,12 +49,14 @@ def manhattan_distance(x, y):
         return None
     return sum(abs(a - b) for a, b in zip(x, y))
 
+
 def inverse_manhattan_similarity(x, y):
     """Calculates the inverse euclidean similarity between the vectors x and y
         Keyword arguments:
             x,y -- the vectors between which the similarity is to be calculated
     """
     return float(1/(1+ manhattan_distance(x,y)))
+
 
 def nth_root(value, n_root):
     """Calculates the nth root of a value
@@ -67,6 +70,7 @@ def nth_root(value, n_root):
     except ZeroDivisionError:
         logging.error("Error! n_root should be greater than 0")
         return None
+
 
 def minkowski_distance(x, y, p_value):
     """Calculates the minskowski's distance between the vectors x and y

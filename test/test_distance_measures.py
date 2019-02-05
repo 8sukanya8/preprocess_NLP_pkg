@@ -17,46 +17,55 @@ class TestEuclideanDistanceMeasures(unittest.TestCase):
 class TestInverseEuclideanSimilarity(unittest.TestCase):
 
     def test_inverse_euclidean_similarity(self):
-        pass
+        self.assertTrue(inverse_euclidean_similarity([1,1],[1,1])==1)
 
 
 class TestManhattanDistance(unittest.TestCase):
 
-    def test_manhattan_distance(self):
-        pass
+    def test_manhattan_distance_array_1_1_and_array_1_1(self):
+        self.assertTrue(manhattan_distance([1,1],[1,1]) == 0)
+
+    def test_manhattan_distance_array_1_1_and_array_1_0(self):
+        self.assertTrue(manhattan_distance([1,1],[1,0]) == 1)
 
 
 class TestInverseManhattanSimilarity(unittest.TestCase):
 
-    def test_inverse_manhattan_similarity(self):
-        pass
+    def test_inverse_manhattan_similarity_array_1_1_and_array_1_1(self):
+        self.assertTrue(inverse_manhattan_similarity([1, 1], [1, 1] == 1))
+
+    def test_inverse_manhattan_similarity_array_1_1_and_array_1_10(self):
+        self.assertTrue(inverse_manhattan_similarity([1, 1], [1, 0] == 0.5))
 
 
 class TestNthRoot(unittest.TestCase):
 
-    def test_nth_root(self):
-        pass
+    def test_8th_root_of_256_is_2(self):
+        self.assertTrue(nth_root(256,8) == 2)
+
+    def test_1th_root_of_1_is_1(self):
+        self.assertTrue(nth_root(1,1) == 1)
 
 
 class TestMinkowskiDistance(unittest.TestCase):
 
-    def test_minkowski_distance(self):
-        pass
+    def test_minkowski_distance_array_0_0_and_1_1_with_p_1_by_4_is_16(self):
+        self.assertTrue(minkowski_distance([0,0],[1,1],0.25) == 16)
 
 
 class TestsSquareRootSum(unittest.TestCase):
 
     def test_square_root_sum(self):
-        pass
+        self.assertTrue(square_root_sum([4,4,4,4]) == 8)
 
 
 class TestCosineSimilarity(unittest.TestCase):
 
     def test_cosine_similarity(self):
-        pass
+        self.assertAlmostEqual(cosine_similarity([1,1],[1,1]), 1.0)
 
 
 class TestJaccardSimilarity(unittest.TestCase):
 
-    def test_jaccard_similarity(self):
-        pass
+    def test_jaccard_similarity_array_1_1_and_1_1_is_1(self):
+        self.assertTrue(jaccard_similarity([1,1],[1,1]) == 1.0)
