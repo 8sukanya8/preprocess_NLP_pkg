@@ -68,7 +68,7 @@ def get_word_list_with_freq_at_least_n(text, n = 2):
             n - those word_list are selected which have frequency greater than or equal to n
     """
     word_freq_dists = get_freq_dist_from_corpus(text)
-    selected_word_list = [word for word,freq in word_freq_dists if freq >= n]
+    selected_word_list = [word for word in word_freq_dists.keys() if word_freq_dists.get(word) >= n]
     return selected_word_list
 
 

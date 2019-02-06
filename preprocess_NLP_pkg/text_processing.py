@@ -126,3 +126,20 @@ def process_word_list(word_list):
     word_list = replace_numbers(word_list)
     #word_list = remove_stopword_list(word_list)
     return word_list
+
+
+def window_tokenizer(text, window_size = 5000, step_size = 100):
+    """Given a text, break it down into windows of mentioned size, skipping characters mentioned in step size
+        Keyword arguments:
+            text -- given text
+            window_size - number of characters in a window
+            step_size - number of characters to skip before beginning next windows
+    """
+    windows = []
+    i = 0
+    while i < (len(text)-window_size + step_size):
+        window = text[i:i + window_size]
+        windows.append(window)
+        i = i + step_size
+    return windows
+
