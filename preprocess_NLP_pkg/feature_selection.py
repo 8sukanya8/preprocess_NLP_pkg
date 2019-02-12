@@ -21,11 +21,10 @@ def convert_dict_to_numpy_array(dictionary):
 
 
 def select_features(feature_list, candidate_dict):
-    """Selects features against a
-            Keyword arguments:
-                text -- given text
-                window_size - number of characters in a window
-                step_size - number of characters to skip before beginning next windows
+    """Returns a new dictionary created by selecting keys in a given candidate dictionary with respect to a given feature list
+        Keyword arguments:
+            feature_list -- list of desired features
+            candidate_dict - base dictionary
     """
     feature_dict = {key: candidate_dict.get(key) for key in feature_list}
     for key in feature_dict.keys():
@@ -36,27 +35,49 @@ def select_features(feature_list, candidate_dict):
 
 """ Lexical features: Such features consider a text as a mere sequence of word-tokens
 """
+
+
 def max_word_length(text):
+    """Returns the length of the longest word in the text
+        Keyword arguments:
+            text: text
+    """
     word_list = nltk.tokenize.word_tokenize(text)
     return len(max(word_list))
 
 
 def average_word_length(text):
+    """Returns the average length of all the words in the text
+        Keyword arguments:
+            text: text
+    """
     word_list = nltk.tokenize.word_tokenize(text)
     return sum([len(word) for word in word_list]) / len(word_list)
 
 
 def max_sentence_length(text):
+    """Returns the length of the longest sentence in the text
+        Keyword arguments:
+            text: text
+    """
     sentences = nltk.tokenize.sent_tokenize(text) # note that english is by default, for other languages set in the config
     return len(max(sentences))
 
 
 def average_sentence_length(text):
+    """Returns the average length of all the sentences in the text
+        Keyword arguments:
+            text: text
+    """
     sentences = nltk.tokenize.sent_tokenize(text)
     return sum([len(sentence) for sentence in sentences]) / len(sentences)
 
 
-def yules_K(text):
+def yules_k(text):
+    """Returns the yules_k of the text
+        Keyword arguments:
+            text: text
+    """
     word_list = nltk.tokenize.word_tokenize(text)
     s1 = len(word_list)
     word_freq_dist = FreqDist(nltk.tokenize.word_tokenize(text))
@@ -65,7 +86,11 @@ def yules_K(text):
     return K
 
 
-def TTR(text):
+def ttr(text):
+    """Returns the text to token ratio of the text
+        Keyword arguments:
+            text: text
+    """
     word_list = nltk.tokenize.word_tokenize(text)
     word_freq_dist = FreqDist(nltk.tokenize.word_tokenize(text))
     tokens = word_freq_dist.keys()
@@ -73,7 +98,7 @@ def TTR(text):
     return lexical_density
 
 
-def word_freq_count(text, number_of_terms = 0):
+def word_freq_count(text, number_of_terms=0):
     """Returns a dictionary of word frequency given a text
         text -- the text from which the word frequencies are to be extracted
         number_of_terms -- number of terms to extract
@@ -145,17 +170,33 @@ def most_common_ngrams(text, n, number_of_terms=0):
 
 
 def alphabet_chars_count(text):
+    """Returns the number of alphabetic characters in the text
+        Keyword arguments:
+            text: text
+    """
     return re.findall("[a-z]", text.lower()).__len__()
 
 
 def uppercase_chars_count(text):
+    """Returns the number of the uppercase alphabetic characters in the text
+        Keyword arguments:
+            text: text
+    """
     return re.findall("[A-Z]", text).__len__()
 
 
 def lowercase_chars_count(text):
+    """Returns the number of the lowercase alphabetic characters in the text
+        Keyword arguments:
+            text: text
+    """
     return re.findall("[A-Z]", text).__len__()
 
 
 def digits_count(text):
+    """Returns the number of the numeric characters in the text
+        Keyword arguments:
+            text: text
+    """
     return re.findall("[0-9]", text).__len__()
 
