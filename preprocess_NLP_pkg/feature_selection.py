@@ -11,7 +11,8 @@ import re
 
 def convert_dict_to_numpy_array(dictionary):
     """Converts a dict into a numpy array.
-        dictionary - the dict to be converted
+        Keyword arguments:
+            dictionary - the dict to be converted
     """
     if type(dictionary) == dict:
         return np.array(list(dictionary.items()))
@@ -20,11 +21,16 @@ def convert_dict_to_numpy_array(dictionary):
 
 
 def select_features(feature_list, candidate_dict):
-    #extract_features = [key for key, value in candidate_dict.items() if key in feature_list]
+    """Selects features against a
+            Keyword arguments:
+                text -- given text
+                window_size - number of characters in a window
+                step_size - number of characters to skip before beginning next windows
+    """
     feature_dict = {key: candidate_dict.get(key) for key in feature_list}
     for key in feature_dict.keys():
         if feature_dict.get(key) is None:
-            feature_dict.get(key) == 0
+            feature_dict[key] = 0
     return feature_dict
 
 
@@ -79,7 +85,7 @@ def word_freq_count(text, number_of_terms = 0):
         return dict(word_freq.most_common(number_of_terms))
 
 
-def select_word_vector(word_freq_dict, text, selected_word_list):
+def select_word_vector(word_freq_dict, selected_word_list):
     """Given a list of selected most common keyword_list, Returns a dictionary of frequent word_list. Note that if a selected keyword is not present, 0 is returened as the key value.
         word_freq_dict -- a dictionary of word frequency
         selected_word_list -- a list of word_list to check against
