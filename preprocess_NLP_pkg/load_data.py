@@ -19,6 +19,8 @@ def read_file(file_path, mode = 'r', ignore_comments = True): # rb for raw binar
             for line in f:
                 if not line.startswith("#"):
                     file_content = file_content + line
+    except FileNotFoundError:
+        print('Filepath ', file_path , " does not exist. Please use a valid filepath")
     finally:
         f.close()
     return file_content
