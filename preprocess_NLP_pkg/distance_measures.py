@@ -1,7 +1,7 @@
 """This file contains functions for calculating similarity or distance measures
 """
 
-from math import sqrt
+from math import sqrt, log
 from decimal import Decimal
 import logging
 
@@ -109,3 +109,78 @@ def jaccard_similarity(x, y):
     intersection = len(set.intersection(*[set(x), set(y)]))
     union = len(set.union(*[set(x), set(y)]))
     return intersection / float(union)
+
+
+def tanimoto_distance(x,y):
+    """Calculates the tanimoto (normalised manhattan) distance between the vectors x and y
+            Keyword arguments:
+                x,y -- the vectors between which the distance is to be calculated
+    """
+    try:
+        iter(x)
+    except TypeError:
+        logging.warning( 'Argument x is not iterable. None is returned')
+        return None
+    try:
+        iter(y)
+    except TypeError:
+        logging.warning( 'Argument y is not iterable. None is returned')
+        return None
+    numerator = sum(abs(a - b) for a, b in zip(x, y))
+    denominator = sum(max(a,b) for a,b in zip(x,y))
+    return numerator/denominator
+
+
+def matusita_distance(x,y):
+    """Calculates the matusita distance (euclidean distance variant) between the vectors x and y
+            Keyword arguments:
+                x,y -- the vectors between which the distance is to be calculated
+    """
+    try:
+        iter(x)
+    except TypeError:
+        logging.warning( 'Argument x is not iterable. None is returned')
+        return None
+    try:
+        iter(y)
+    except TypeError:
+        logging.warning( 'Argument y is not iterable. None is returned')
+        return None
+    return sqrt(sum(pow(sqrt(a) - sqrt(b), 2) for a, b in zip(x, y)))
+
+
+def clark_distance(x,y):
+    """Calculates the clark distance (euclidean distance variant) between the vectors x and y
+            Keyword arguments:
+                x,y -- the vectors between which the distance is to be calculated
+    """
+    try:
+        iter(x)
+    except TypeError:
+        logging.warning( 'Argument x is not iterable. None is returned')
+        return None
+    try:
+        iter(y)
+    except TypeError:
+        logging.warning( 'Argument y is not iterable. None is returned')
+        return None
+    return sqrt(sum(pow(abs(a - b)/(a + b), 2) for a, b in zip(x, y)))
+
+
+def jeffrey_divergence(x,y):
+    """Calculates the jeffrey divergence between the vectors x and y
+                Keyword arguments:
+                    x,y -- the vectors between which the distance is to be calculated
+        """
+    try:
+        iter(x)
+    except TypeError:
+        logging.warning('Argument x is not iterable. None is returned')
+        return None
+    try:
+        iter(y)
+    except TypeError:
+        logging.warning('Argument y is not iterable. None is returned')
+        return None
+    return sum((a - b)*log(a/b) for a, b in zip(x, y))
+
