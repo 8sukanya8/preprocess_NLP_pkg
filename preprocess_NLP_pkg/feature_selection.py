@@ -110,16 +110,16 @@ def word_freq_count(text, number_of_terms=0):
         return dict(word_freq.most_common(number_of_terms))
 
 
-def select_word_vector(word_freq_dict, selected_word_list):
+def select_feature_vector(feature_freq_dict, selected_feature):
     """Given a list of selected most common keyword_list, Returns a dictionary of frequent word_list. Note that if a selected keyword is not present, 0 is returened as the key value.
-        word_freq_dict -- a dictionary of word frequency
-        selected_word_list -- a list of word_list to check against
+        feature_freq_dict -- a dictionary of word frequency
+        selected_feature -- a list of word_list to check against
     """
     word_freq_dict_selected = {}
-    for key in selected_word_list:
+    for key in selected_feature:
         value = 0
-        if word_freq_dict.get(key) is not None:
-            value = word_freq_dict.get(key)
+        if feature_freq_dict.get(key) is not None:
+            value = feature_freq_dict.get(key)
         word_freq_dict_selected[key] = value
     return word_freq_dict_selected
 
