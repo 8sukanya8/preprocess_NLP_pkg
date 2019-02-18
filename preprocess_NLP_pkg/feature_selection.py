@@ -159,7 +159,7 @@ def char_ngram_count(text, n, number_of_terms = 0):
 
 
 def char_ngram_count_normalised(text, n, number_of_terms = 0):
-    """Returns a list of word frequencies given a text
+    """Returns a list of ngram frequencies given a text
         text -- the text from which the word frequencies are to be extracted
         n - the number of grams (2 indicates bigram)
         number_of_terms -- number of terms to extract
