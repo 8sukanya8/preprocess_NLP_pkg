@@ -158,6 +158,23 @@ def char_ngram_count(text, n, number_of_terms = 0):
         return dict(char_ngrams_freq.most_common(number_of_terms))
 
 
+def char_ngram_count_normalised(text, n, number_of_terms = 0):
+    """Returns a list of word frequencies given a text
+        text -- the text from which the word frequencies are to be extracted
+        n - the number of grams (2 indicates bigram)
+        number_of_terms -- number of terms to extract
+    """
+    char_ngrams = [text[i:i + n] for i in range(len(text) - n + 1)]
+    char_ngrams_freq = collections.Counter(char_ngrams)
+    for key in char_ngrams_freq.keys():
+        value = char_ngrams_freq[key]
+        char_ngrams_freq[key] = value/char_ngrams.__len__()
+    if number_of_terms <= 0:
+        return  dict(char_ngrams_freq)
+    else:
+        return dict(char_ngrams_freq.most_common(number_of_terms))
+
+
 def alphabet_chars_count(text):
     """Returns the number of alphabetic characters in the text
         Keyword arguments:
