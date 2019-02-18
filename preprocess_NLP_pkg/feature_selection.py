@@ -148,25 +148,14 @@ def word_freq_count_normalised(text, number_of_terms = 0):
 
 
 ## need to test the functions
-def char_ngram_freq(text, n):
+def char_ngram_count(text, n, number_of_terms = 0):
     #word_grams = nltk.ngrams(text.split(), n)
     char_ngrams = [text[i:i + n] for i in range(len(text) - n + 1)]
     char_ngrams_freq = collections.Counter(char_ngrams)
-    return char_ngrams_freq
-
-
-def most_common_ngrams(text, n, number_of_terms=0):
-    """Returns the most common ngrams as a dictionary
-        text -- the text from which the ngrams are to be extracted
-        number_of_terms -- number of terms to extract
-    """
-    all_ngrams = char_ngram_freq(text, n)
-    if number_of_terms == 0:
-        return all_ngrams.most_common()
-    elif number_of_terms >0 :
-        return all_ngrams.most_common(number_of_terms)
+    if number_of_terms <= 0:
+        return  dict(char_ngrams_freq)
     else:
-        print("Error! Cannot have negative number of ngrams returned")
+        return dict(char_ngrams_freq.most_common(number_of_terms))
 
 
 def alphabet_chars_count(text):
