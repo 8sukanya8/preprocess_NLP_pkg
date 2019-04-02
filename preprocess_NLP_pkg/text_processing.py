@@ -26,7 +26,7 @@ def paragraph_tokenizer(text, delimiter = '\n\n'):
             text -- given text
             delimiter - type of delimiter to be used, default value is '\n\n'
     """
-    paragraphs = text.split("\n\n")
+    paragraphs = text.split(delimiter)
     return paragraphs
 
 

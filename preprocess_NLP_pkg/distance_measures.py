@@ -127,7 +127,7 @@ def tanimoto_distance(x,y):
         logging.warning( 'Argument y is not iterable. None is returned')
         return None
     numerator = sum(abs(a - b) for a, b in zip(x, y))
-    denominator = sum(max(a,b) for a,b in zip(x,y))
+    denominator = sum(max(a, b) for a,b in zip(x,y))
     return numerator/denominator
 
 
@@ -169,9 +169,9 @@ def clark_distance(x,y):
 
 def jeffrey_divergence(x,y):
     """Calculates the jeffrey divergence between the vectors x and y
-                Keyword arguments:
-                    x,y -- the vectors between which the distance is to be calculated
-        """
+            Keyword arguments:
+                x,y -- the vectors between which the distance is to be calculated
+    """
     try:
         iter(x)
     except TypeError:
@@ -184,3 +184,34 @@ def jeffrey_divergence(x,y):
         return None
     return sum((a - b)*log(a/b) for a, b in zip(x, y))
 
+
+def kullback_leibler_divergence(x,y, delta = 0.001):
+    """Calculates the jeffrey divergence between the vectors x and y
+            Keyword arguments:
+                x,y -- the vectors between which the distance is to be calculated
+                delta -- a very small value meant to replace 0, to prevent log(0). Actually, better called lambda but that is a keyword
+    """
+    try:
+        iter(x)
+    except TypeError:
+        logging.warning('Argument x is not iterable. None is returned')
+        return None
+    try:
+        iter(y)
+    except TypeError:
+        logging.warning('Argument y is not iterable. None is returned')
+        return None
+    y_modified = [delta if val == 0 else val for val in y] # modified to replace zero with a small value delta
+    x_modified = [delta if val == 0 else val for val in x]
+    return sum(a * log(a / b) for a, b in zip(x_modified, y_modified))
+
+
+def symmetric_kullback_leibler_divergence(x,y, delta = 0.001):
+    """Calculates the jeffrey divergence between the vectors x and y
+            Keyword arguments:
+                x,y -- the vectors between which the distance is to be calculated
+                delta -- a very small value meant to replace 0, to prevent log(0). Actually, better called lambda but that is a keyword
+    """
+    kld_x_y = kullback_leibler_divergence(x,y, delta = 0.001)
+    kld_y_x = kullback_leibler_divergence(y,x, delta = 0.001)
+    return (kld_x_y + kld_y_x)/2
