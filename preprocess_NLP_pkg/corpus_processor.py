@@ -98,3 +98,4 @@ def append_folder_path_to_doc_list(doc_list, folder_path):
         doc_paths.append(folder_path + '/' + doc)
     return  doc_paths
 
+

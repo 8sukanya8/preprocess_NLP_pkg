@@ -40,7 +40,6 @@ This creates the dist folder containing the packaged tar files.
 
 ```pip install ./dist/preprocess_NLP_pkg-0.0.1.tar.gz```
 
-
 #### To Uninstall package
 
 ```pip uninstall preprocess_NLP_pkg-0.0.1```

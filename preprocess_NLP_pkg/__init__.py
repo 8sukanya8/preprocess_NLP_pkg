@@ -4,3 +4,4 @@ from .distance_measures import *
 from .feature_selection import *
 from .text_processing import *
 from .corpus_processor import *
+from .stats import *
